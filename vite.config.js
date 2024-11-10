@@ -1,6 +1,12 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/umasshack24.github.io/',  // Set base to your GitHub repo name if deploying to a repo (remove if personal site)
-});
+  base: 'https://guessver.tech', // if deploying to a subdirectory
+  // OR use your custom domain if deploying to the root
+  // base: 'https://yourcustomdomain.com/',
 
+  build: {
+    outDir: 'dist', // default, but you can change if needed
+  },
+  // other configurations...
+});
