@@ -39,7 +39,7 @@ h1 {
   line-height: 1.1;
 }
 
-.Entry input {
+.Entry input{
   background-color:white;
   color:black;
   border-color:transparent;
@@ -158,12 +158,30 @@ h1 {
 #submit {
   position:absolute;      
   top: 50%;
-  left: 90%;                              
+  left: 90%;   
+  background-color: transparent;
+  outline-color: transparent;       
+  border: transparent;             
   transform: translate(-50%, -50%); 
   width: 20px;             
-  height: 20px;          
+  height: 20px;    
+  align-items: center;      
 }
-
+#submit:hover{
+  cursor: pointer;
+}
+#submit img{
+  width: 300%;
+  height: 100%;
+  transition: transform 0.05s ease-in-out;
+  object-fit: contain;
+}
+#submit img:hover{
+  transform: scale(1.1);
+  width: 300%;
+  height: 100%;
+  object-fit: contain;
+}
 .typewriter {
   top: 50%;
   left: 50%;
