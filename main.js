@@ -1,6 +1,6 @@
 import './style.css';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -44,7 +44,7 @@ var objects = [
     ["monkey.glb", ["monkey", "chimp", "monke", "suzanne"], "Don't go bananas!"],
     ["teapot.glb", ["teapot", "tea pot", "kettle", "tea kettle", "teakettle", "pot"], "Tea"],
     ["boat.glb", ["boat", "steamboat", "steam boat", "benchy", "ship", "3dbenchy", "3d benchy"], "Full steam ahead!"],
-    ["gem.glb", ["gem", "gemstone", "gem stone", "diamond", "ruby"], "Shiny!"],
+    ["gem.glb", ["gem", "gemstone", "gem stone", "diamond", "ruby"], "Shiny ore!"],
     ["pear.glb", ["pear"], "This fruit pairs well with cheese!"],
     ["pumpkin.glb", ["pumpkin"], "Cinderella story"]
 ]
@@ -84,10 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
             funcReturn = newObject(objects, currentObjIndex);
             objects = funcReturn[0];
             currentObjIndex = funcReturn[1];
-            button.style.transform = 'translateX(100vw)';
         });
     }
+
     function getGuess(event) {
+        event.preventDefault();
         var correct = false;
 
         if(intro){
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentObjIndex = funcReturn[1];
             timesWrong = 0;
         }
-      event.preventDefault();
+      
       var guess = text.value;
       form.reset();
       guess = guess.toLowerCase();
@@ -149,12 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 hint.classList.remove('show');
             }, 600);  
         }
-
-        
       }
     }
 
     subBut.addEventListener('click', getGuess);
+    text.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+            getGuess(event);        // Call the guess handler when Enter is pressed
+        }
+    });
+
   });
   const textMesh = new THREE.Object3D;
   function winGameScreen(){
@@ -206,7 +212,9 @@ function newObject(objects, indexToRemove){
     currentObjIndex = indexToRemove==-1 ? 0 : currentObjIndex;
     if(intro){
         intro = false;
-        message.style.transform = 'translateX(100vw)';
+        //message.style.transform = 'translateX(100vw)';
+        document.getElementById("start").style.display = "none";
+        document.getElementById("message").style.display = "none";
         currentObjIndex = 0;
     }
     const modelLoader = new GLTFLoader();
@@ -286,7 +294,7 @@ window.addEventListener('resize', () => {
 
 	renderer.setSize(width, height);
 
-	camera.aspect = width	 / height;
+	camera.aspect = width / height;
 
 	camera.updateProjectionMatrix();
 });
