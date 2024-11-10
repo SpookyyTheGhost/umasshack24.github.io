@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: 'https://guessver.tech', // if deploying to a subdirectory
-  // OR use your custom domain if deploying to the root
-  // base: 'https://yourcustomdomain.com/',
+  // Set to '/' when deploying to the root of a custom domain
+  base: '/',  // This is correct for a custom domain like guessver.tech
 
   build: {
-    outDir: 'dist', // default, but you can change if needed
+    outDir: 'dist', // output directory for production build
   },
   // other configurations...
 });
